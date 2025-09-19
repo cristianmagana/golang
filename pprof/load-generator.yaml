@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: load-generator-script
+data:
+  load-test.sh: |
+    #!/bin/bash
+    
+    echo "Starting load generator..."
+    SERVICE_URL="http://load-test-app-service:8080"
+    
+    # Function to make requests
+    make_requests() {
+        local endpoint=$1
+        local requests=$2
+        local delay=$3
+        
+        for i in $(seq 1 $requests); do
+            curl -s "$SERVICE_URL$endpoint" > /dev/null &
+            if [ $((i % 10)) -eq 0 ]; then
+                echo "Made $i requests to $endpoint"
+            fi
+            sleep $delay
+        done
+        wait
+    }
+    
+    # Background load generators
+    while true; do
+        echo "=== Starting load test cycle ==="
+        
+        # Light load on main endpoint
+        make_requests "/" 50 0.1 &
+        
+        # Medium load on health endpoint
+        make_requests "/health" 30 0.2 &
+        
+        # Heavy load on load endpoint (CPU intensive)
+        make_requests "/load" 20 0.5 &
+        
+        # Metrics endpoint
+        make_requests "/metrics" 10 1 &
+        
+        # Wait for this cycle to complete
+        wait
+        
+        echo "=== Load test cycle completed, sleeping 30s ==="
+        sleep 30
+    done
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    app: load-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+      - name: load-generator
+        image: alpine/curl:latest
+        command: ["/bin/sh"]
+        args: ["/scripts/load-test.sh"]
+        volumeMounts:
+        - name: script-volume
+          mountPath: /scripts
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+      volumes:
+      - name: script-volume
+        configMap:
+          name: load-generator-script
+          defaultMode: 0755
+      restartPolicy: Always
