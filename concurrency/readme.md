@@ -98,6 +98,17 @@ Create a calculator service:
    - Sends result to `results` channel
 4. In main: send 5 different calculations through `jobs`, receive and print 5 results
 
+<details>
+    <summary> Additional Exercise </summary>
+
+    Create a ping-pong game:
+
+    1. Create two channels: ping chan string and pong chan string
+    2. Create a pingPlayer function that receives from ping, prints the message, and sends "pong" to pong channel
+    3. Create a pongPlayer function that receives from pong, prints the message, and sends "ping" to ping channel
+    4. Start both players as goroutines
+    5. Send initial "ping" message and let them play 5 rounds
+</details>
 ---
 
 ## Exercise 3: Buffered Channels & Channel Directions

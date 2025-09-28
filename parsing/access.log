@@ -1,0 +1,11 @@
+192.168.1.100 - - [25/Sep/2025:10:15:23 +0000] "GET /api/users HTTP/1.1" 200 1534 "-" "Mozilla/5.0"
+10.0.0.5 - - [25/Sep/2025:10:15:24 +0000] "POST /api/login HTTP/1.1" 200 89 "-" "curl/7.68.0"
+192.168.1.101 - - [25/Sep/2025:10:15:25 +0000] "GET /api/orders HTTP/1.1" 500 0 "-" "Mozilla/5.0"
+malformed log entry without proper format
+172.16.0.10 - admin [25/Sep/2025:10:15:26 +0000] "DELETE /api/users/123 HTTP/1.1" 404 142 "-" "PostmanRuntime/7.29.0"
+192.168.1.100 - - [25/Sep/2025:10:15:27 +0000] "GET /health HTTP/1.1" 200 15 "-" "kube-probe/1.21"
+10.0.0.5 - - [25/Sep/2025:10:16:01 +0000] "POST /api/orders HTTP/1.1" 201 456 "-" "mobile-app/2.1.0"
+192.168.1.102 - - [25/Sep/2025:10:16:02 +0000] "GET /api/users HTTP/1.1" 429 78 "-" "bot-scanner/1.0"
+172.16.0.11 - - [25/Sep/2025:10:16:03 +0000] "GET /api/metrics HTTP/1.1" 200 2048 "-" "prometheus/2.30.0"
+192.168.1.100 - - [25/Sep/2025:10:16:04 +0000] "POST /api/logout HTTP/1.1" 500 0 "-" "Mozilla/5.0"
+192.168.1.103 - - [25/Sep/2025:10:16:05 +0000] "GET /api/orders HTTP/1.1" 200 890 "-" "Mozilla/5.0"
