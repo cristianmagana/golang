@@ -21,7 +21,7 @@ func expensiveProcessing(line string) string {
 	return fmt.Sprintf("[PROCESSED %.2f] %s", result, line)
 }
 
-func main() {
+func main3() {
 	lines := make(chan string, 100)
 	results := make(chan string, 1000)
 	errorc := make(chan error, 1)

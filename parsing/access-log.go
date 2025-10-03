@@ -72,7 +72,7 @@ func readFileWithChannels(path string) (<-chan string, <-chan error) {
 		for scanner.Scan() {
 			lines <- scanner.Text()
 		}
-		if err == scanner.Err() && err != nil {
+		if err := scanner.Err(); err != nil {
 			errc <- err
 		}
 		close(errc)

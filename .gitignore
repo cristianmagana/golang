@@ -56,3 +56,8 @@ builds/**/images/*
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+.log
+.csv
+.json
+.txt
