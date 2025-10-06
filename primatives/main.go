@@ -1,21 +1,23 @@
 package main
 
 func main() {
-	PrintDataTypes()
+	// PrintDataTypes()
 
-	sentence := "  Hello, World! Welcome to Go Programming  "
+	// sentence := "  Hello, World! Welcome to Go Programming  "
 
-	StringManipulation(sentence)
+	// StringManipulation(sentence)
 
-	Math()
+	// Math()
 
-	Slices()
+	// Slices()
 
-	Maps()
+	// Maps()
 
-	ControlFlow()
+	// ControlFlow()
 
-	Pointers()
+	// Pointers()
 
-	Structs()
+	// Structs()
+
+	Interface()
 }
