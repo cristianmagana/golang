@@ -112,7 +112,7 @@ func submitJobs(ctx context.Context, jobs chan<- Job, jobList []Job) {
 	}
 }
 
-func main() {
+func main2() {
 	// Create 50 jobs
 	jobList := make([]Job, 50)
 	for i := range jobList {

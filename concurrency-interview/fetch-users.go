@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
@@ -101,7 +102,7 @@ func fetchAllUsers(ctx context.Context, userIDs []int, maxRPS int) (map[int]*Use
 	return results, ctx.Err()
 }
 
-func FetchUsers() {
+func main() {
 	userIDs := make([]int, 100)
 	for i := range userIDs {
 
@@ -124,12 +125,9 @@ func FetchUsers() {
 	elapsed := time.Since(start)
 
 	count := 0
-	for id, data := range results {
-		if count >= 5 {
-			break
-
-		}
-		fmt.Printf("id: %d, data: %v\n", id, data)
+	for _, data := range results {
+		b, _ := json.Marshal(data)
+		fmt.Println(string(b))
 		count++
 	}
 
