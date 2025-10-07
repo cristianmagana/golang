@@ -102,7 +102,7 @@ func fetchAllUsers(ctx context.Context, userIDs []int, maxRPS int) (map[int]*Use
 	return results, ctx.Err()
 }
 
-func main() {
+func main3() {
 	userIDs := make([]int, 100)
 	for i := range userIDs {
 
