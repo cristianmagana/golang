@@ -69,13 +69,13 @@ func dataSource(numRecords int, maxConcurrency int) <-chan *DataRecord {
 	var wg sync.WaitGroup
 	sema := make(chan struct{}, maxConcurrency)
 
-	for i := 1; i < numRecords; i++ {
+	for i := 1; i <= numRecords; i++ {
 		wg.Add(1)
 		go func(id int) {
 			defer wg.Done()
 			sema <- struct{}{}
 			defer func() { <-sema }()
-			rec, err := fetchData(i)
+			rec, err := fetchData(id)
 			if err == nil {
 				out <- rec
 			}
@@ -164,7 +164,7 @@ func aggregate(input <-chan *ProcessedData) *AggregatedResult {
 	}
 }
 
-func main() {
+func main_() {
 	numRecords := 100
 	numProcessors := 5
 	maxConcurrency := 1
