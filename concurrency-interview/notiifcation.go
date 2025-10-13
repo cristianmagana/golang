@@ -200,7 +200,7 @@ func (d *Dispatcher) Shutdown(timeout time.Duration) error {
 	}
 }
 
-func main() {
+func Notifications() {
 	dispatcher := NewDispatcher(5) // 5 workers
 
 	// Submit test notifications
